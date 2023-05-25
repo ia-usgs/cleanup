@@ -55,14 +55,14 @@ if os.path.isdir('word_documents/') == False:
     os.mkdir('word_documents')
     
     for doc in worddocs:
-        new_path = 'worddocs/' + doc
+        new_path = 'word_documents/' + doc
         shutil.move(doc, new_path)
     
      
     worddocs2 = [f for f in os.listdir() if '.doc' in f.lower()]
     
     for doc in worddocs2:
-        new_path = 'worddocs/' + doc
+        new_path = 'word_documents/' + doc
         shutil.move(doc, new_path)
     print('Created WORD DOCS Directory')
     
@@ -98,13 +98,13 @@ else:
     worddocs = [f for f in os.listdir() if '.docx' in f.lower()]
     
     for doc in worddocs:
-        new_path = 'worddocs/' + doc
+        new_path = 'word_documents/' + doc
         shutil.move(doc, new_path)
     
      
     worddocs2 = [f for f in os.listdir() if '.doc' in f.lower()]
     
     for doc in worddocs2:
-        new_path = 'worddocs/' + doc
+        new_path = 'word_documents/' + doc
         shutil.move(doc, new_path)
         
