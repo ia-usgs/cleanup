@@ -10,14 +10,14 @@ import os, os.path
 import shutil
 from tkinter import *
 import tkinter
-from tkinter import messagebox
+
 
 
 
         
 top = tkinter.Tk()
 
-top.geometry("100x100")
+top.geometry("200x125")
 
 def letsClean():
     if os.path.isdir('downloaded_images/') == False:
@@ -49,6 +49,7 @@ def letsClean():
             new_path = 'exe_files/' + exe
             shutil.move(exe, new_path)
         print('Created Exe Directory')
+        print('EXE is now moved to ' + new_path + '\n')
         
     if os.path.isdir('downloaded_pdfs/') == False:
         
@@ -60,6 +61,7 @@ def letsClean():
             new_path = 'downloaded_pdfs/' + pdf
             shutil.move(pdf, new_path)
         print('Created PDFS Directory')
+        print('PDF is now moved to ' + new_path + '\n')
         
     if os.path.isdir('word_documents/') == False:
         
@@ -78,6 +80,20 @@ def letsClean():
             new_path = 'word_documents/' + doc
             shutil.move(doc, new_path)
         print('Created WORD DOCS Directory')
+        print('Doc is now moved to ' + new_path + '\n')
+        
+    if os.path.isdir('html_documents/') == False:
+        
+        htmldocs = [f for f in os.listdir() if '.html' in f.lower()]
+        
+        os.mkdir('html_documents')
+        
+        for html in htmldocs:
+            new_path = 'html_documents/' + html
+            shutil.move(html, new_path)
+            
+        print('Created a HTML Directory')
+        print('HTML file is now moved to ' + new_path + '\n')
         
     else:
         
@@ -128,9 +144,18 @@ def letsClean():
             new_path = 'word_documents/' + doc
             shutil.move(doc, new_path)
             print("Doc is now moved to " + new_path + "\n" )
+            
+        htmldocs = [f for f in os.listdir() if '.html' in f.lower()]
+        
+        for html in htmldocs:
+            new_path = 'html_documents/' + html
+            shutil.move(html, new_path)
+            print('HTML file is now moved to ' + new_path + '\n')
+        
     
-B = Button(top, text = "Clean", command = letsClean)
-B.place(x = 50, y = 50)
+B = Button(top, text = "Clean", command = letsClean, borderwidth=2 )
+B.place(x = 80, y = 45)
+
 
 top.mainloop()
 
