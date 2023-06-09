@@ -95,6 +95,19 @@ def letsClean():
         print('Created a HTML Directory')
         print('HTML file is now moved to ' + new_path + '\n')
         
+    if os.path.isdir('zip_files') == False:
+        
+        zipfiles = [f for f in os.listdir() if '.zip' in f.lower()]
+        
+        os.mkdir('zip_files')
+        
+        for zipfile in zipfiles:
+            new_path = 'zip_files/' + zipfile
+            shutil.move(zipfile, new_path)
+            
+        print('Created zip file Directory')
+        print('Zip file is now moved to ' + new_path + '\n')
+        
     else:
         
         
@@ -151,10 +164,18 @@ def letsClean():
             new_path = 'html_documents/' + html
             shutil.move(html, new_path)
             print('HTML file is now moved to ' + new_path + '\n')
+            
+        zipfiles = [f for f in os.listdir() if '.zip' in f.lower()]
         
-    
-B = Button(top, text = "Clean", command = letsClean, borderwidth=2 )
+        for zipfile in zipfiles:
+            new_path = 'zip_files/' + zipfile
+            shutil.move(zipfile, new_path)
+            print('Zip file is now moved to ' + new_path + '\n')
+
+ 
+B = Button(top, text = "Clean", command = letsClean, borderwidth=2)
 B.place(x = 80, y = 45)
+
 
 
 top.mainloop()
