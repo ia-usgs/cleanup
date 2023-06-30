@@ -38,6 +38,7 @@ def letsClean():
             shutil.move(image, new_path)
             
         print('Created Images Directory')
+        print('Image is now moved to ' + new_path + '\n')
         
     if os.path.isdir('exe_files/') == False:
 
@@ -108,6 +109,20 @@ def letsClean():
         print('Created zip file Directory')
         print('Zip file is now moved to ' + new_path + '\n')
         
+    if os.path.isdir('downloaded_csv/') == False:
+
+
+        csvs = [f for f in os.listdir() if '.csv' in f.lower()]
+            
+        os.mkdir('downloaded_csv')
+            
+        for csv in csvs:
+            new_path = 'downloaded_csv/' + csv
+            shutil.move(csv, new_path)
+            
+            
+        print('Created CSV Directory')
+        print('CSV is now moved to ' + new_path + '\n')
     else:
         
         
@@ -171,8 +186,15 @@ def letsClean():
             new_path = 'zip_files/' + zipfile
             shutil.move(zipfile, new_path)
             print('Zip file is now moved to ' + new_path + '\n')
+            
+        csvs = [f for f in os.listdir() if '.csv' in f.lower()]
+            
+        for csv in csvs:
+            new_path = 'downloaded_csv/' + csv
+            shutil.move(csv, new_path)
+            
+        print('CSV is now moved to ' + new_path + '\n')
 
- 
 B = Button(top, text = "Clean", command = letsClean, borderwidth=2)
 B.place(x = 80, y = 45)
 
