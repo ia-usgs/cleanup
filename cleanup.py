@@ -6,199 +6,70 @@
 
 
 
-import os, os.path
+import os
 import shutil
-from tkinter import *
-import tkinter
+import tkinter as tk
 
 
+extensions_to_folders = {
+    '.jpg': 'Images',
+    '.png': 'Images',
+    '.exe': 'Executables',
+    '.pdf': 'PDFs',
+    '.docx': 'WordDocuments',
+    '.doc': 'WordDocuments',
+    '.html': 'HTML',
+    '.zip': 'Archives',
+    '.csv': 'CSV',
+    '.txt': 'TextFiles',
+    '.xlsx': 'Spreadsheets',
+    '.pptx': 'Presentations',
+    '.mp3': 'Music',
+    '.mp4': 'Videos',
+    '.py': 'PythonScripts',
+    '.java': 'JavaFiles',
+    '.cpp': 'C++Files',
+    '.js': 'JavaScriptFiles',
+    '.css': 'CSSFiles',
+    '.php': 'PHPFiles',
+    '.json': 'JSONFiles',
+    '.xml': 'XMLFiles',
+    '.sql': 'SQLFiles',
+    '.gif': 'GIFFiles',
+    '.ico': 'IconFiles',
+    '.svg': 'SVGFiles'
+}
 
+excluded_files = ['cleanup.exe', 'cleanup.py']
 
-        
-top = tkinter.Tk()
+def move_files_to_folder(folder, extensions):
+    files = [f for f in os.listdir() if any(ext in f.lower() for ext in extensions) and f not in excluded_files]
 
-top.geometry("200x125")
+    if not files:
+        return
+
+    if not os.path.isdir(folder):
+        os.mkdir(folder)
+        print(f'Created {folder} directory')
+
+    for file in files:
+        new_path = f'{folder}/{file}'
+        shutil.move(file, new_path)
+        print(f'{file} is now moved to {new_path}')
 
 def letsClean():
-    if os.path.isdir('downloaded_images/') == False:
+    for extension, folder in extensions_to_folders.items():
+        move_files_to_folder(folder, [extension])
 
+def clean_files():
+    letsClean()
+    print('Cleanup complete.')
 
-        images = [f for f in os.listdir() if '.jpg' in f.lower()]
-            
-        os.mkdir('downloaded_images')
-            
-        for image in images:
-            new_path = 'downloaded_images/' + image
-            shutil.move(image, new_path)
-            
-        images2 = [f for f in os.listdir() if '.png' in f.lower()]
-            
-        for image in images2:
-            new_path = 'downloaded_images/' + image
-            shutil.move(image, new_path)
-            
-        print('Created Images Directory')
-        print('Image is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('exe_files/') == False:
+def create_gui():
+    top = tk.Tk()
+    top.geometry("200x125")
+    button = tk.Button(top, text="Clean", command=clean_files, borderwidth=2)
+    button.place(x=80, y=45)
+    top.mainloop()
 
-        executables = [f for f in os.listdir() if '.exe' in f.lower()]
-        
-        os.mkdir('exe_files')
-        
-        for exe in executables:
-            new_path = 'exe_files/' + exe
-            shutil.move(exe, new_path)
-        print('Created Exe Directory')
-        print('EXE is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('downloaded_pdfs/') == False:
-        
-        pdfs = [f for f in os.listdir() if '.pdf' in f.lower()]
-        
-        os.mkdir('downloaded_pdfs')
-        
-        for pdf in pdfs:
-            new_path = 'downloaded_pdfs/' + pdf
-            shutil.move(pdf, new_path)
-        print('Created PDFS Directory')
-        print('PDF is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('word_documents/') == False:
-        
-        worddocs = [f for f in os.listdir() if '.docx' in f.lower()]
-        
-        os.mkdir('word_documents')
-        
-        for doc in worddocs:
-            new_path = 'word_documents/' + doc
-            shutil.move(doc, new_path)
-        
-         
-        worddocs2 = [f for f in os.listdir() if '.doc' in f.lower()]
-        
-        for doc in worddocs2:
-            new_path = 'word_documents/' + doc
-            shutil.move(doc, new_path)
-        print('Created WORD DOCS Directory')
-        print('Doc is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('html_documents/') == False:
-        
-        htmldocs = [f for f in os.listdir() if '.html' in f.lower()]
-        
-        os.mkdir('html_documents')
-        
-        for html in htmldocs:
-            new_path = 'html_documents/' + html
-            shutil.move(html, new_path)
-            
-        print('Created a HTML Directory')
-        print('HTML file is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('zip_files') == False:
-        
-        zipfiles = [f for f in os.listdir() if '.zip' in f.lower()]
-        
-        os.mkdir('zip_files')
-        
-        for zipfile in zipfiles:
-            new_path = 'zip_files/' + zipfile
-            shutil.move(zipfile, new_path)
-            
-        print('Created zip file Directory')
-        print('Zip file is now moved to ' + new_path + '\n')
-        
-    if os.path.isdir('downloaded_csv/') == False:
-
-
-        csvs = [f for f in os.listdir() if '.csv' in f.lower()]
-            
-        os.mkdir('downloaded_csv')
-            
-        for csv in csvs:
-            new_path = 'downloaded_csv/' + csv
-            shutil.move(csv, new_path)
-            
-            
-        print('Created CSV Directory')
-        print('CSV is now moved to ' + new_path + '\n')
-    else:
-        
-        
-        images = [f for f in os.listdir() if '.jpg' in f.lower()]
-        
-        for image in images:
-            new_path = 'downloaded_images/' + image
-            shutil.move(image, new_path)
-            print("Image is now moved to " + new_path + "\n" )
-            
-        images2 = [f for f in os.listdir() if '.png' in f.lower()]
-            
-        for image in images2:
-            new_path = 'downloaded_images/' + image
-            shutil.move(image, new_path)
-            print("Image is now moved to " + new_path + "\n" )
-
-        
-        executables = [f for f in os.listdir() if '.exe' in f.lower()]
-        
-        for exe in executables:
-            new_path = 'exe_files/' + exe
-            shutil.move(exe, new_path)
-            print("Exe is now moved to " + new_path + "\n")
-
-
-            
-        pdfs = [f for f in os.listdir() if '.pdf' in f.lower()]
-        
-        for pdf in pdfs:
-            new_path = 'downloaded_pdfs/' + pdf
-            shutil.move(pdf, new_path)
-            print("PDF is now moved to " + new_path + "\n" )
-            
-        
-        worddocs = [f for f in os.listdir() if '.docx' in f.lower()]
-        
-        for doc in worddocs:
-            new_path = 'word_documents/' + doc
-            shutil.move(doc, new_path)
-            print("Doc is now moved to " + new_path + "\n" )
-        
-         
-        worddocs2 = [f for f in os.listdir() if '.doc' in f.lower()]
-        
-        for doc in worddocs2:
-            new_path = 'word_documents/' + doc
-            shutil.move(doc, new_path)
-            print("Doc is now moved to " + new_path + "\n" )
-            
-        htmldocs = [f for f in os.listdir() if '.html' in f.lower()]
-        
-        for html in htmldocs:
-            new_path = 'html_documents/' + html
-            shutil.move(html, new_path)
-            print('HTML file is now moved to ' + new_path + '\n')
-            
-        zipfiles = [f for f in os.listdir() if '.zip' in f.lower()]
-        
-        for zipfile in zipfiles:
-            new_path = 'zip_files/' + zipfile
-            shutil.move(zipfile, new_path)
-            print('Zip file is now moved to ' + new_path + '\n')
-            
-        csvs = [f for f in os.listdir() if '.csv' in f.lower()]
-            
-        for csv in csvs:
-            new_path = 'downloaded_csv/' + csv
-            shutil.move(csv, new_path)
-            
-        print('CSV is now moved to ' + new_path + '\n')
-
-B = Button(top, text = "Clean", command = letsClean, borderwidth=2)
-B.place(x = 80, y = 45)
-
-
-
-top.mainloop()
-
+create_gui()
